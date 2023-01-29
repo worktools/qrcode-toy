@@ -94,9 +94,11 @@ class _QrcodeToyHomePageState extends State<QrcodeToyHomePage> {
             context,
             MaterialPageRoute(builder: (context) => const ScannerRoute()),
           );
-          setState(() {
-            textFieldController.text = result as String;
-          });
+          if (result != null) {
+            setState(() {
+              textFieldController.text = result as String;
+            });
+          }
         }),
         child: const Icon(Icons.find_in_page),
       ),
