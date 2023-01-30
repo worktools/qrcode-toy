@@ -11,28 +11,31 @@ class ScannerRoute extends StatelessWidget {
         title: const Text('Scan Code'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            MobileScanner(
-                allowDuplicates: false,
-                onDetect: (barcode, args) {
-                  if (barcode.rawValue == null) {
-                    debugPrint('Failed to scan Barcode');
-                    Navigator.pop(context, "Failed to scan Barcode");
-                  } else {
-                    final String code = barcode.rawValue!;
-                    debugPrint('Barcode found! $code');
-                    Navigator.pop(context, code);
-                  }
-                }),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Cancel'),
-            )
-          ],
-        ),
+        child: SingleChildScrollView(
+            padding: const EdgeInsets.all(0),
+            child: Column(
+              children: <Widget>[
+                MobileScanner(
+                    allowDuplicates: false,
+                    fit: BoxFit.fitHeight,
+                    onDetect: (barcode, args) {
+                      if (barcode.rawValue == null) {
+                        debugPrint('Failed to scan Barcode');
+                        Navigator.pop(context, "Failed to scan Barcode");
+                      } else {
+                        final String code = barcode.rawValue!;
+                        debugPrint('Barcode found! $code');
+                        Navigator.pop(context, code);
+                      }
+                    }),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel'),
+                )
+              ],
+            )),
       ),
     );
   }
